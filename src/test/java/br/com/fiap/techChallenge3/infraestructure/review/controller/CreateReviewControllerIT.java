@@ -1,6 +1,7 @@
 package br.com.fiap.techChallenge3.infraestructure.review.controller;
 
 import br.com.fiap.techChallenge3.infraestructure.customer.controller.CreateCustomerControllerIT;
+import br.com.fiap.techChallenge3.infraestructure.restaurant.controller.CreateRestaurantControllerIT;
 import br.com.fiap.techChallenge3.utils.Config;
 import br.com.fiap.techChallenge3.utils.ReviewHelper;
 import org.junit.jupiter.api.BeforeAll;
@@ -20,10 +21,13 @@ public class CreateReviewControllerIT {
     private static final int PORT = Config.getLocalhostPort();
     private static final String BASE_PATH = "/reviews";
     ReviewHelper reviewHelper = new ReviewHelper();
-    CreateCustomerControllerIT createCustomerControllerIT = new CreateCustomerControllerIT();
+
 
     @BeforeAll
     public void setup(){
+        CreateRestaurantControllerIT createRestaurantControllerIT= new CreateRestaurantControllerIT();
+        createRestaurantControllerIT.shouldCreateRestaurantSucess();
+        CreateCustomerControllerIT createCustomerControllerIT = new CreateCustomerControllerIT();
         createCustomerControllerIT.shouldCreateCustomerSucess();
     }
 

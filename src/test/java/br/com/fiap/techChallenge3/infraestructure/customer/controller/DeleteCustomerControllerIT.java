@@ -26,7 +26,7 @@ class DeleteCustomerControllerIT {
     }
 
     @Test
-    public void shouldGetReservationIdSuccessfully(){
+    public void shouldDeleteReservationIdSuccessfully(){
         int customerId = 1;
 
         String responseBody = given()
