@@ -1,8 +1,13 @@
-# Use a official base image
-FROM openjdk:17
+FROM maven:3.8.4-openjdk-17-slim AS build
 
-# Copy the jar file into the image
-COPY target/techChallenge3-0.0.1-SNAPSHOT.jar techChallenge3-0.0.1-SNAPSHOT.jar
+WORKDIR /app
 
-# Command to run the application
-CMD ["java", "-jar", "/techChallenge3-0.0.1-SNAPSHOT.jar"]
+COPY . /app
+
+RUN mvn package
+
+FROM openjdk:17-jdk-slim
+
+COPY --from=build /app/target/*.jar /app/app.jar
+
+ENTRYPOINT ["java", "-Djava.security.egd=file:/dev/./unrandom", "-jar", "/app/app.jar"]
