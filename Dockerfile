@@ -8,6 +8,8 @@ RUN mvn package
 
 FROM openjdk:17-jdk-slim
 
+EXPOSE 8080
+
 COPY --from=build /app/target/*.jar /app/app.jar
 
 ENTRYPOINT ["java", "-Djava.security.egd=file:/dev/./unrandom", "-jar", "/app/app.jar"]
